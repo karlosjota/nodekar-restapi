@@ -1,0 +1,56 @@
+## Taller apirestfull con nodejs
+## Tutorial de Fazt
+
+## Crear una app de node
+## Ejecutar dentro de un contenedor
+
+## Una vez creado el dir y abierto en remoto con ssh desde Visual Studio
+## Abrir una consola y ejecutar :
+    $ npm init -y
+
+## Instlar express
+$ npm i express
+ + express@4.17.1
+
+ ## Se suben los dos .json para que el container sepa con qué versiones de express etc va a necesitar. 
+
+ ## Crear directorio scr/ para no mezclar dirs de app con dirs de ops
+
+ ## Dentro de src/ crear archivo index.json
+        - tiene como tarea arrancar el servidor
+
+## Crar archivo app.js con el código de servidor 
+
+## dentro de src/ crear routes/ con su archivo  index.js    
+    - guardará las rutas inciales 
+
+## Creamos un callback con el mensja de servidor corriendo
+
+## Creamos una imagen docker 
+    - creamos el archvo .Dockerfile
+## buscamos en hub.docker.com los contenedore necesarios para crear nuestrai imagen docker
+    - en nuestro caso node, la verisión 12
+
+## Indicamos el directoriod e trabajo a través de la directiva WORKDIR
+    - en este caso se llamará /app
+## Con la directiva COPY pasamos el árbol de dir actual a /app
+    - debemos copiar los archivos .json     
+            COPY package*.json ./   
+## Le ordenamos correr el comando npm install para que isntale
+las dependencias de la app
+        RUN npm install
+
+## Ahora copiamos todos los archvio de la app co copy ..
+    COPY . . 
+    un punto representa "todo" y el otro al dir de trabajo
+## creamos el archivo .dockerignore
+## creamos la directiva de ejecucion del container
+    CMD ["npm", "start"]
+    start sirve para ejecutar código en servidores remoto 
+## creamos el cotenedor con el comando y nombre:
+$ docker build -t nodekar-restapi .
+    siendo el punto la represetación del todo   
+## terminado de ejecutar nos devuleve un ID
+    Successfully built 04f40733e8f4
+
+
